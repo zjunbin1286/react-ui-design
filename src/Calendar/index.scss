@@ -18,7 +18,7 @@
   }
   &-body {
     &-row {
-      height: 80px;
+      height: 100px;
       display: flex;
     }
     &-cell {
@@ -30,7 +30,7 @@
         border-right: 1px solid #eee;
       }
       color: #ccc;
-      overflow: hidden;
+      overflow: auto;
       &-current {
         color: #000;
       }
@@ -99,3 +99,17 @@
     }
   }
 }
+/*滚动条样式*/
+.calendar-month-body-cell::-webkit-scrollbar {
+  display: none;
+}
+// .calendar-month-body-cell::-webkit-scrollbar-thumb {
+//   border-radius: 10px;
+//   -webkit-box-shadow: inset 0 0 2px #979797;
+//   background: #eee;
+// }
+// .calendar-month-body-cell::-webkit-scrollbar-track {
+//   -webkit-box-shadow: inset 0 0 2px #fff;
+//   border-radius: 0;
+//   background: #eee;
+// }
