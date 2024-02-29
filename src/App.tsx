@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
+import Calendar from './Calendar';
+import dayjs from 'dayjs';
 
 function App() {
   return (
     <div className="App">
-      <h2>React UI Design</h2>
+      <Calendar value={dayjs('2023-11-08')}></Calendar>
     </div>
   );
 }
