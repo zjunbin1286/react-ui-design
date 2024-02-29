@@ -1,7 +1,14 @@
-import { Dayjs } from 'dayjs'
+import { useContext } from 'react'
+import dayjs, { Dayjs } from 'dayjs'
+import cs from 'classnames'
 import { CalendarProps } from '.'
+import LocaleContext from './LocaleContext'
+import allLocales from './locale'
 
-interface MonthCalendarProps extends CalendarProps {}
+interface MonthCalendarProps extends CalendarProps {
+  selectHandler? :(date: Dayjs) => void,
+  curMonth: Dayjs,
+}
 
 /**
  * 获取当月全部日期数据
@@ -37,25 +44,7 @@ function getAllDays(date: Dayjs) {
   return daysInfo;
 }
 
-/**
- * 渲染日期
- * @param days 日期列表 
- * @returns
- */
-function renderDays(days: Array<{ date: Dayjs, currentMonth: boolean}>) {
-  const rows = [];
-  for(let i = 0; i < 6; i++ ) {
-      const row = [];
-      for(let j = 0; j < 7; j++) {
-        const item = days[i * 7 + j];
-        row[j] = <div className={
-          "calendar-month-body-cell " + (item.currentMonth ? 'calendar-month-body-cell-current' : '')
-        }>{item.date.date()}</div>
-      }
-      rows.push(row);
-  }
-  return rows.map(row => <div className="calendar-month-body-row">{row}</div>)
-}
+
 
 /**
  * 月份组件
@@ -63,21 +52,75 @@ function renderDays(days: Array<{ date: Dayjs, currentMonth: boolean}>) {
  * @returns 
  */
 function MonthCalendar(props: MonthCalendarProps) {
-  const weekList = ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
 
-  const allDays = getAllDays(props.value)
+  const localeContext = useContext(LocaleContext);
+
+  const { value, dateRender, dateInnerContent, selectHandler, curMonth } = props
+
+  const CalendarLocale = allLocales[localeContext.locale];
+
+  const weekList = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+
+  const allDays = getAllDays(curMonth)
+
+  // 判断是否当天
+  function checkCurrent(item: any) {
+    return value.format('YYYY-MM-DD') === item.date.format('YYYY-MM-DD')
+  }
+
+  // 渲染日期
+  function renderDays(
+    days: Array<{ date: Dayjs, currentMonth: boolean}>,
+  ) {
+    const rows = [];
+
+    for(let i = 0; i < 6; i++ ) {
+      const row = [];
+      for(let j = 0; j < 7; j++) {
+        const item = days[i * 7 + j];
+        row[j] = (
+          <div
+            className={
+              "calendar-month-body-cell "
+                + (item.currentMonth ? 'calendar-month-body-cell-current ' : '')
+                + (checkCurrent(item) ? 'calendar-month-body-cell-selected' : '')
+            } 
+            key={i + j}
+            onClick={() => selectHandler?.(item.date)}
+          >
+            {
+              dateRender ? dateRender(item.date) : (
+                <div className='calendar-month-body-cell-date'>
+                  <div className={
+                    cs('calendar-month-body-cell-date-value',
+                      checkCurrent(item)
+                      ? 'calendar-month-body-cell-date-selected'
+                      : '')
+                  }>{item.date.date()}</div>
+                  <div className="calendar-month-body-cell-date-content">{dateInnerContent?.(item.date)}</div>
+                </div>
+              )
+            }
+          </div>
+        )
+      }
+      rows.push(row);
+    }
+    return rows.map((row ,i) => <div className="calendar-month-body-row" key={i}>{row}</div>)
+  }
 
   return (
     <div className="calendar-month">
       <div className="calendar-month-week-list">
         {weekList.map((week) => (
           <div className="calendar-month-week-list-item" key={week}>
-            {week}
+            {CalendarLocale.week[week]}
           </div>
         ))}
       </div>
       <div className="calendar-month-body">
         {
+          // renderDays(allDays, dateRender, dateInnerContent, value, selectHandler)
           renderDays(allDays)
         }
       </div>
