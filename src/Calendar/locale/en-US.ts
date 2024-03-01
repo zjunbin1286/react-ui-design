@@ -1,4 +1,4 @@
-import { CalendarType } from './interface'
+import { CalendarType } from './interface';
 
 const CalendarLocale: CalendarType = {
   formatYear: 'YYYY',
@@ -16,7 +16,7 @@ const CalendarLocale: CalendarType = {
     September: 'September',
     October: 'October',
     November: 'November',
-    December: 'December',
+    December: 'December'
   },
   week: {
     monday: 'Monday',
@@ -25,8 +25,8 @@ const CalendarLocale: CalendarType = {
     thursday: 'Thursday',
     friday: 'Friday',
     saturday: 'Saturday',
-    sunday: 'Sunday',
-  },
-}
+    sunday: 'Sunday'
+  }
+};
 
-export default CalendarLocale
+export default CalendarLocale;

@@ -9,14 +9,14 @@ function App() {
       case 8:
         listData = [
           { type: 'warning', content: 'This is warning event.' },
-          { type: 'success', content: 'This is usual event.' },
+          { type: 'success', content: 'This is usual event.' }
         ];
         break;
       case 10:
         listData = [
           { type: 'warning', content: 'This is warning event.' },
           { type: 'success', content: 'This is usual event.' },
-          { type: 'error', content: 'This is error event.' },
+          { type: 'error', content: 'This is error event.' }
         ];
         break;
       case 15:
@@ -26,7 +26,7 @@ function App() {
           { type: 'error', content: 'This is error event 1.' },
           { type: 'error', content: 'This is error event 2.' },
           { type: 'error', content: 'This is error event 3.' },
-          { type: 'error', content: 'This is error event 4.' },
+          { type: 'error', content: 'This is error event 4.' }
         ];
         break;
       default:
@@ -35,23 +35,17 @@ function App() {
   }
   function dateCellRender(value: any) {
     const listData = getListData(value);
-    
+
     return (
       <ul className="events">
-        {listData.length ? listData.map(item => (
-          <li key={item.content}>
-             · {item.content}
-          </li>
-        )) : value.date()}
+        {listData.length
+          ? listData.map((item) => <li key={item.content}>· {item.content}</li>)
+          : value.date()}
       </ul>
     );
   }
   return (
-    <div className="App" style={{display: 'flex', margin: '50px auto'}}>
-      {/* <div className="left" style={{ width: 400}}>啊哈哈</div>
-      <div className="right" style={{ width: 800, height: 450}}>
-        <Calendar value={dayjs('2024-02-29')} style={{height: '40px'}} dateRender={dateCellRender}></Calendar>
-      </div> */}
+    <div className="App">
       <Calendar value={dayjs('2024-02-29')}></Calendar>
     </div>
   );
