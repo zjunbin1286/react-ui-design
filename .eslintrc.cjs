@@ -22,6 +22,7 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
+    '@typescript-eslint/no-empty-interface': 'off'
   },
   settings: {
     react: {
