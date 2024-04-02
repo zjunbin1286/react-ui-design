@@ -6,9 +6,11 @@
 
 ### Calendar 日历组件
 
-### Icon 图片组件
+### Icon 图标组件
 
 ### Space 间距组件
+
+### Message 全局提示组件
 
 # 版本
 
