@@ -4,33 +4,22 @@ import React, { useRef } from 'react';
 // import Calendar from './Calendar';
 // import dayjs from 'dayjs';
 
-// import { PlusOutlined, MailOutlined, UserOutlined } from './Icon/icons';
+import {
+  PlusOutlined,
+  MailOutlined,
+  UserOutlined,
+  SuccessMsg
+} from './Icon/icons';
 // import { createFromIconfont } from './Icon/createFrontIconfont';
 // const IconFont = createFromIconfont(
 //   '//at.alicdn.com/t/c/font_3836578_jrc58m0r5v.js'
 // );
 
-// import Space from './Space';
+import Space from './Space';
 // import { ConfigProvider } from './Space/ConfigProvider';
 
 import { ConfigProvider } from './Message/ConfigProvider';
 import { useMessage } from './Message/useMessage';
-
-function TestMessage() {
-  const message = useMessage();
-
-  return (
-    <button
-      onClick={() => {
-        message.add({
-          content: '✨ 更新数据成功！'
-        });
-      }}
-    >
-      成功
-    </button>
-  );
-}
 
 function App() {
   return (
@@ -73,6 +62,31 @@ function App() {
         </ConfigProvider>
       </div>
     </div>
+  );
+}
+
+// 测试全局消息提示组件
+function TestMessage() {
+  const message = useMessage();
+  const handleMsg = (type: any, content: string) => {
+    message.add({
+      type,
+      content
+    });
+  };
+  return (
+    <Space>
+      <button onClick={() => handleMsg('info', '一条普通的消息提示')}>
+        Info
+      </button>
+      <button onClick={() => handleMsg('success', '更新成功！')}>Succes</button>
+      <button onClick={() => handleMsg('error', '网络请求失败！')}>
+        Error
+      </button>
+      <button onClick={() => handleMsg('warning', '警告，该数据不可删除！')}>
+        Warning
+      </button>
+    </Space>
   );
 }
 

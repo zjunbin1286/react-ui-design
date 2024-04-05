@@ -1,14 +1,7 @@
-import {
-  CSSProperties,
-  FC,
-  ReactNode,
-  forwardRef,
-  useEffect,
-  useImperativeHandle,
-  useMemo
-} from 'react';
-import useStore, { MessageList } from './useStore';
+import { CSSProperties, FC, ReactNode, forwardRef, useMemo } from 'react';
+import useStore from './useStore';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { SuccessMsg, ErrorMsg, WarningMsg, InfoMsg } from '../Icon/icons';
 
 import './index.scss';
 import { createPortal } from 'react-dom';
@@ -24,7 +17,16 @@ export interface MessageProps {
   onClose?: (...args: any) => void;
   id?: number;
   position?: Position;
+  icon?: ReactNode | string;
+  type?: 'success' | 'error' | 'warning' | 'info';
 }
+
+const msgType = {
+  success: <SuccessMsg color="#52c41a" fontSize={18} />,
+  error: <ErrorMsg color="#ff4d4f" fontSize={18} />,
+  warning: <WarningMsg color="#faad14" fontSize={18} />,
+  info: <InfoMsg color="#1677ff" fontSize={18} />
+};
 
 const MessageItem: FC<MessageProps> = (item) => {
   const { onMouseEnter, onMouseLeave } = useTimer({
@@ -39,6 +41,8 @@ const MessageItem: FC<MessageProps> = (item) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
+      {item.icon && item.icon}
+      {item.type && msgType[item.type]}&nbsp;&nbsp;
       {item.content}
     </div>
   );

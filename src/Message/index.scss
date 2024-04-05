@@ -44,6 +44,8 @@
 }
 
 .message-item {
+  display: flex;
+  align-items: center;
   margin-bottom: 12px;
   padding: 9px 12px;
   font-size: 14px;
@@ -51,4 +53,9 @@
     0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   border-radius: 8px;
   pointer-events: all;
+}
+
+.message-icon {
+  font-size: 20px;
+  margin-right: 7px;
 }
