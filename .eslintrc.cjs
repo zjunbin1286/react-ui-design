@@ -23,7 +23,8 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/display-name': 'off',
     '@typescript-eslint/no-empty-interface': 'off',
-    '@typescript-eslint/ban-types': 'off'
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
   settings: {
     react: {
