@@ -4,13 +4,15 @@
 
 # 组件总览
 
-### Calendar 日历组件
+### Calendar 日历
 
-### Icon 图标组件
+### Icon 图标
 
-### Space 间距组件
+### Space 间距
 
-### Message 全局提示组件
+### Message 全局提示
+
+### OnBoarding 漫游式引导
 
 # 版本
 
